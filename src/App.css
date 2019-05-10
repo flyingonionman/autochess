@@ -18,10 +18,17 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+
 html{
   background-color:#494749;
 }
 
+ul{
+  list-style-type:none;
+}
+li {
+  display: inline;
+}
 button{
   border: none;
   color: black;
@@ -36,7 +43,7 @@ button:hover{
 #main{
   width: 44%;
   text-align: center;
-  margin: 3% 26%;
+  margin: 1% 26%;
   position: relative;
   padding: 3%;
   background-color: #b3432b;
@@ -47,9 +54,24 @@ button:hover{
   position: relative;
     width:100%;
     margin: auto;
-    margin: 3% 0%;
+    margin: 1% 0%;
 }
 
+#roulette{
+  padding: 0 1%;
+    position: relative;
+    width: 80%;
+    margin: 7% 8%;
+}
+.hero{
+  background-color: #daad7e;
+  display: inline-block;
+  padding: 12px;
+  margin: 6px;
+  height: 20px;
+  width: 127px;
+  border-radius: 13px;
+}
 #amount{
   margin: 5%;
   display:inline;

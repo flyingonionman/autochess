@@ -30,25 +30,28 @@ class Main extends Component {
   constructor(props) {
     super(props);
 
-    this.handleroll = this.handleroll.bind(this);
     this.handlelower = this.handlelower.bind(this);
     this.handlehigher = this.handlehigher.bind(this);
+    this.rolleroni = this.rolleroni.bind(this);
+
   }
 
-  async componentDidMount(){
+  componentDidMount(){
+    this.rolleroni();
+  }
+
+  rolleroni(){
+    let currlvl= this.state.player.level;
     const arr = [];
-    await this.setState((state)=>{
-        for (let i = 0; i++ ;i <5)  {
-          let randomizer =  Math.floor(Math.random() * 13); 
-          
-          arr.push(this.state.units_one[randomizer]);
-        }
-        return{deck:arr}
+    this.setState((state)=>{
+      for (let i = 0;i <5; i++ )  {
+        let randomizer =  Math.floor(Math.random() * 13); 
+        arr.push(this.state.units_one[randomizer]);
+      }
+      return{deck:arr}
     });
   }
-  handleroll(){
-      console.log('pepehands')
-  }
+
 
   handlelower(){
     ((this.state.player.level-1 >= 1)?
@@ -96,17 +99,24 @@ class Main extends Component {
         </table>
         </div>
         <div id = "roulette">
-          <HeroCard id="hero" hero={this.state.deck[0]}></HeroCard>
-          <HeroCard id="hero" hero={this.state.deck[1]}></HeroCard>
-          <HeroCard id="hero" hero={this.state.deck[2]}></HeroCard>
-          <HeroCard id="hero" hero={this.state.deck[3]}></HeroCard>
-          <HeroCard id="hero" hero={this.state.deck[4]}></HeroCard>
+          <ul>
+            <li  id="hero1"><HeroCard  hero={this.state.deck[0]}></HeroCard></li>
+            <li  id="hero2"><HeroCard  hero={this.state.deck[1]}></HeroCard></li>
+            <li  id="hero3"><HeroCard  hero={this.state.deck[2]}></HeroCard></li>
+            <li  id="hero4"><HeroCard  hero={this.state.deck[3]}></HeroCard></li>
+            <li id="hero5"><HeroCard  hero={this.state.deck[4]}></HeroCard></li>
+
+          </ul>
         </div>
 
         <div id= 'interaction'>
-          <button onClick={this.handleroll}>Roll!</button>
+          <button onClick={this.rolleroni}>Roll!</button>
           <button onClick={this.handlelower}>Lower Level</button>
           <button onClick={this.handlehigher}>Raise Level</button>
+        </div>
+
+        <div id="others">
+          Populate other board to simulate an actual game
         </div>
       </div>
     )
@@ -117,8 +127,9 @@ const HeroCard = props => {
   const {hero} = props;
 
   return(
-    <div>
-     <h2>{hero} : Hero name</h2> 
+    
+    <div className="hero"  >
+     {hero} 
     </div>
   )
 }
