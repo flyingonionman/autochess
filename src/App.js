@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import './App.css'
 function App() {
   return (
-    <div className="App">
+    <div className="App"> 
         <header className="App-header">
           <Main/>       
       </header>
@@ -12,15 +12,15 @@ function App() {
 
 class Main extends Component {
   state = {
-    units_one: ['Antimage','Axe','Batrider','BountyHunter','Clockwerk','DrowRanger','Enchantress','Mars','OgreMagi',
-                'ShadowShaman','Tinker','Tiny','Tusk'],
-    units_two: ['BeastMaster','ChaosKnight','CrystalMaiden','Furion','Juggernaut','Luna','Mirana','Morphling','Puck',
-                'QueenOfPain','Sladar','Timbersaw','WitchDoctor'],
-    units_three:['Abaddon','Dazzle','Lina','Lycan','OmniKnight','PhantomAssassin','Razor','ShadowFiend','Sniper',
-                  ,'Terrorblade','TreantProtector','Venomancer','Viper','Windranger'],
-    units_four:['Alchemist','Disruptor','Doom','DragonKnight','KeeperOfTheLight','Kunkka','LoneDruid','Medusa','Necrophos',
-                'TemplarAssassin','TrollWarlord'],
-    units_five:['DeathProphet','Enigma','Gyrocopter','Io','Techies','Tidehunter','Zeus'],
+    units_one: {'Antimage':{} ,'Axe' :{},'Batrider' :{},'BountyHunter' :{},'Clockwerk' :{},'DrowRanger'  :{},'Enchantress'  :{},'Mars'  :{},'OgreMagi'  :{},
+                 'ShadowShaman' :{},' Tinker' :{},'Tiny' :{},'Tusk':{} } ,
+    units_two: { 'BeastMaster'  :{},'ChaosKnight'  :{},' CrystalMaiden'  :{},'Furion'  :{},'Juggernaut'  :{},'Luna'  :{},'Mirana'  :{},'Morphling'  :{},'Puck' :{},
+                 'QueenOfPain'  :{},'Sladar'  :{},'Timbersaw'  :{},'WitchDoctor':{} } ,
+    units_three:{ 'Abaddon'  :{},'Dazzle'  :{},'Lina'  :{},'Lycan'  :{},'OmniKnight'  :{},'PhantomAssassin'  :{},'Razor'  :{},'ShadowFiend'  :{},'Sniper'  :{},
+                   'Terrorblade'  :{},'TreantProtector'  :{},'Venomancer'  :{},'Viper'  :{},'Windranger':{} } ,
+    units_four:{ 'Alchemist'  :{},'Disruptor'  :{},'Doom'  :{},'DragonKnight'  :{},'KeeperOfTheLight'  :{},'Kunkka'  :{},'LoneDruid'  :{},'Medusa'  :{},'Necrophos'  :{},
+                 'TemplarAssassin'  :{},'TrollWarlord':{} } ,
+    units_five:{ 'DeathProphet'  :{},'Enigma'  :{},'Gyrocopter'  :{},'Io'  :{},'Techies'  :{},'Tidehunter'  :{},'Zeus':{} },
     deck:[],
     player:{
       level:1
@@ -33,11 +33,21 @@ class Main extends Component {
     this.handlelower = this.handlelower.bind(this);
     this.handlehigher = this.handlehigher.bind(this);
     this.rolleroni = this.rolleroni.bind(this);
-
   }
 
   componentDidMount(){
+    
+    for (let k =0;k<13; k++) {
+      var heroname = Object.keys(this.state.units_one)[k];
+      this.setState({ units_one: {...this.state.units_one,[heroname]:
+          {...this.state.units_one[heroname].amount,amount:45}
+      
+        }
+      })    
+    }
+
     this.rolleroni();
+    
   }
 
   rolleroni(){
@@ -46,16 +56,18 @@ class Main extends Component {
     this.setState((state)=>{
       for (let i = 0;i <5; i++ )  {
         let randomizer =  Math.floor(Math.random() * 13); 
-        arr.push(this.state.units_one[randomizer]);
+        arr.push(Object.keys(this.state.units_one)[randomizer]);
       }
       return{deck:arr}
     });
+
   }
 
 
   handlelower(){
     ((this.state.player.level-1 >= 1)?
-      this.setState({ player: {level:this.state.player.level-1} })    
+      this.setState({ player: {level:this.state.player.level-1} })  
+        
       :
       alert("Level Cannot Fall Below 1 !!!") 
     )
@@ -63,6 +75,7 @@ class Main extends Component {
   }
 
   handlehigher(){
+    console.log(this.state.units_one)
     this.setState({ player: {level:this.state.player.level+1} })
   }
 
